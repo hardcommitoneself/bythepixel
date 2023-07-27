@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Cache;
 
 class WeatherCurrentController extends Controller
 {
@@ -11,8 +13,14 @@ class WeatherCurrentController extends Controller
      */
     public function __invoke(Request $request)
     {
-        return response()->json([
-            "msg" => "you will get current weather upon location you requested"
-        ]);
+        $data = [];
+
+        $users = User::all();
+
+        foreach ($users as $user) {
+            $data[] = Cache::get("user-{$user->id}-current");
+        }
+
+        return response()->json($data);
     }
 }
