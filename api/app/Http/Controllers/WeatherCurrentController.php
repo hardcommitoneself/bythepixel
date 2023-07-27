@@ -11,16 +11,16 @@ class WeatherCurrentController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function __invoke(Request $request)
+    public function __invoke(int $userId)
     {
-        $data = [];
+        try {
+            $user = User::findOrFail($userId);
 
-        $users = User::all();
+            $data = Cache::get("user-{$user->id}-current");
 
-        foreach ($users as $user) {
-            $data[] = Cache::get("user-{$user->id}-current");
+            return response()->json($data);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 501);
         }
-
-        return response()->json($data);
     }
 }

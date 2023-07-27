@@ -21,4 +21,4 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/current', WeatherCurrentController::class);
+Route::get('/current/{userId}', WeatherCurrentController::class);
