@@ -29,6 +29,19 @@ class Weather
     }
 
     /**
+     * Get forecast weather of any location over the world.
      *
+     * Documentation : https://docs.tomorrow.io/reference/weather-forecast
+     *
+     * @param array $query
+     * @return mixed
      */
+    public static function getForecast(array $query)
+    {
+        $ep = '/v4/weather/forecast?';
+
+        $data = (new WeatherClient())->client()->fetch($ep, $query);
+
+        return $data;
+    }
 }

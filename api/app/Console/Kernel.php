@@ -5,6 +5,7 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Jobs\FetchCurrentWeather;
+use App\Jobs\FetchForecastWeather;
 
 class Kernel extends ConsoleKernel
 {
@@ -16,8 +17,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // Fetch current weather minutely
+        // Fetch current weather every minute
         $schedule->job(new FetchCurrentWeather())->everyMinute();
+
+        // Fetch forecast weather hourly
+        $schedule->job(new FetchForecastWeather())->hourly();
     }
 
     /**
