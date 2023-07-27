@@ -18,7 +18,9 @@ class WeatherCurrentController extends Controller
 
             $data = Cache::get("user-{$user->id}-current");
 
-            return response()->json($data);
+            event(new \App\Events\GetCurrentWeather($userId, $data));
+
+            return response()->json(['msg' => 'success']);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 501);
         }

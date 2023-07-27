@@ -22,5 +22,8 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/test', function () {
+});
+
 Route::get('/current/{userId}', WeatherCurrentController::class);
 Route::get('/forecast/{userId}', WeatherForecastController::class);

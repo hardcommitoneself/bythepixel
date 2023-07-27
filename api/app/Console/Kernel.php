@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel
         $schedule->job(new FetchCurrentWeather())->everyMinute();
 
         // Fetch forecast weather hourly
-        $schedule->job(new FetchForecastWeather())->hourly();
+        $schedule->job(new FetchForecastWeather())->everyMinute();
     }
 
     /**
