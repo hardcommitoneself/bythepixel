@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WeatherCurrentController;
+use App\Http\Controllers\WeatherForecastController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,4 @@ Route::get('/', function () {
 });
 
 Route::get('/current/{userId}', WeatherCurrentController::class);
+Route::get('/forecast/{userId}', WeatherForecastController::class);
